@@ -1,0 +1,24 @@
+"Resources": {
+    "myStack": {
+      "Type": "AWS::OpsWorks::Stack",
+      "Properties": {
+        "Name": "Dev3-POA"
+        "ServiceRoleArn": {
+          "Fn::Join": [
+            "", ["arn:aws:iam::", {"Ref": "AWS::AccountId"},
+                  ":role/", {"Ref": "ServiceRole"}]
+          ]
+        },
+        "DefaultInstanceProfileArn": {
+          "Fn::Join": [
+            "", ["arn:aws:iam::", {"Ref": "AWS::AccountId"},
+              ":instance-profile/", {"Ref": "InstanceRole"}]
+          ]
+        },
+        "UseCustomCookbooks": "true",
+        "CustomCookbooksSource": {
+          "Type": "git",
+          "Url": "git@github.com:consensus/OpsWorks.git"
+        }
+      }
+    },    
